@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -8,51 +8,51 @@ import { AuthContext } from "../AuthContext";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [loginMessage, setloginMessage] = useState("");
+  const [loginMessage, setLoginMessage] = useState("");
   const [countdown, setCountdown] = useState(5);
   const navigate = useNavigate();
+  const { handleLoginSuccess } = useContext(AuthContext);
 
+  useEffect(() => {
+    let timer;
+    if (loginMessage === "Login Successfully") {
+      timer = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000);
 
-  const {handleLoginSuccess}=useContext(AuthContext);
- 
+      const timeout = setTimeout(() => {
+        clearInterval(timer);
+        navigate("/");
+      }, 5000);
+
+      return () => {
+        clearInterval(timer);
+        clearTimeout(timeout);
+      };
+    }
+  }, [loginMessage, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const userData = {
-      email,
-      password,
-    };
+    const userData = { email, password };
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/login",
-        userData
-      );
+      const response = await axios.post("http://localhost:3000/login", userData);
       const data = response.data;
 
       const token = data.token;
       localStorage.setItem("token", token);
 
-
-      setloginMessage("Login Successfully");
+      setLoginMessage("Login Successfully");
       handleLoginSuccess();
-      let timer = setInterval(() => {
-        setCountdown((prevCountdown) => prevCountdown - 1);
-      }, 1000);
-
-      setTimeout(() => {
-        clearInterval(timer);
-        navigate("/");
-      }, 5000);
     } catch (error) {
       if (error.response && error.response.data.error) {
-        setloginMessage(error.response.data.error);
+        setLoginMessage(error.response.data.error);
       } else {
-        setloginMessage("Something went wrong");
+        setLoginMessage("Something went wrong");
       }
-      console.log(error); 
+      console.log(error);
     }
   };
 
@@ -62,7 +62,7 @@ const Login = () => {
         <div className="login-container">
           <div className="form-container">
             <h1 className="opacity">LOGIN</h1>
-            <form>
+            <form onSubmit={handleLogin}>
               <input
                 type="email"
                 placeholder="EMAIL"
@@ -75,19 +75,14 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Button className="login-button" onClick={handleLogin}>
+              <Button className="login-button" type="submit">
                 LOG IN
               </Button>
             </form>
-            
             {loginMessage && (
               <p
                 className={`message login-msg ${
-                  loginMessage
-                    ? loginMessage === "Login Successfully"
-                      ? "success"
-                      : "error"
-                    : ""
+                  loginMessage === "Login Successfully" ? "success" : "error"
                 }`}
               >
                 {loginMessage}
@@ -95,8 +90,7 @@ const Login = () => {
             )}
             {loginMessage === "Login Successfully" && countdown > 0 && (
               <p className="countdown-timer login-timer">
-                Redirecting in <span className="timer">{countdown}</span>{" "}
-                seconds to HOME...
+                Redirecting in <span className="timer">{countdown}</span> seconds to HOME...
               </p>
             )}
           </div>
