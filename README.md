@@ -1,6 +1,5 @@
 # Food Folio - Food Waste Management Platform
 
-<h1>Food Folio</h1>
     <p>
         <strong>Food Folio</strong> is a responsive web application designed to showcase recipes with a searchable and filterable dashboard. 
         While its primary focus is on recipe management, the app’s architecture and modular codebase can easily integrate Role-Based Access Control (RBAC) features 
