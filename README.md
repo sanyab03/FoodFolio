@@ -1,84 +1,48 @@
-# Food Folio - Food Waste Management Platform
+# Food Folio
 
-    <p>
-        <strong>Food Folio</strong> is a responsive web application designed to showcase recipes with a searchable and filterable dashboard. 
-        While its primary focus is on recipe management, the app’s architecture and modular codebase can easily integrate Role-Based Access Control (RBAC) features 
-        to manage user roles and permissions.
-    </p>
+**Food Folio** is a modern and responsive web application designed to help users discover, search, and organize their favorite recipes. With a clean, intuitive interface, it enables seamless browsing and management of recipes. Built using **React.js** for the frontend and **CSS** for styling, this project showcases a solid understanding of frontend development practices, user experience (UX) design, and the integration of future functionalities like **Role-Based Access Control (RBAC)**.
 
-    <h2>Features</h2>
-    <h3>Current Features</h3>
-    <ul>
-        <li><strong>Searchable Dashboard:</strong> Quickly locate recipes using a powerful search functionality.</li>
-        <li><strong>Dynamic Filtering:</strong> Refine results based on categories or tags.</li>
-        <li><strong>Responsive Design:</strong> Optimized for desktop and mobile viewing.</li>
-        <li><strong>Clean UI:</strong> Minimalistic and visually appealing layout for an intuitive user experience.</li>
-    </ul>
+## Alignment with RBAC UI 
 
-    <h3>Potential RBAC Integration</h3>
-    <ul>
-        <li><strong>User Role Management:</strong> Assign roles (e.g., admin, editor, viewer) to users.</li>
-        <li><strong>Permission Handling:</strong> Define role-specific access to features like adding, editing, or deleting recipes.</li>
-        <li><strong>Secure UI Elements:</strong> Restrict visibility or interaction with components based on roles.</li>
-    </ul>
+The **Food Folio** project was developed with an eye toward **Role-Based Access Control (RBAC)**, a concept crucial for managing access to different parts of a web application based on user roles. The RBAC system defines roles (e.g., **admin**, **user**, **guest**) and assigns specific permissions to each role, controlling access to various features or functionalities in the app. Although **RBAC** has not yet been fully implemented in **Food Folio**, the app’s architecture is designed with this in mind, allowing easy integration of RBAC in the future.
 
-    <h2>Tech Stack</h2>
-    <h3>Frontend</h3>
-    <ul>
-        <li><strong>React:</strong> For component-based UI development and efficient state management.</li>
-        <li><strong>CSS:</strong> For styling, focusing on responsive and accessible design.</li>
-    </ul>
-    <h3>Hosting</h3>
-    <ul>
-        <li><strong>Vercel:</strong> For seamless deployment and continuous integration.</li>
-    </ul>
-    <h3>RBAC Readiness</h3>
-    <ul>
-        <li><strong>Component-Based Design:</strong> Easily extendable for implementing role-based logic.</li>
-        <li><strong>State Management:</strong> Integration with context API or third-party libraries (e.g., Redux) for role/permission handling.</li>
-        <li><strong>Routing:</strong> Protected routes can be added using React Router for role-restricted navigation.</li>
-    </ul>
+### Key Features of **Food Folio**:
 
-    <h2>Setup Instructions</h2>
-    <ol>
-        <li><strong>Clone the Repository:</strong>
-            <pre><code>git clone &lt;repository-link&gt;</code></pre>
-        </li>
-        <li><strong>Navigate to the Project Directory:</strong>
-            <pre><code>cd food-folio</code></pre>
-        </li>
-        <li><strong>Install Dependencies:</strong>
-            <pre><code>npm install</code></pre>
-        </li>
-        <li><strong>Run the Development Server:</strong>
-            <pre><code>npm start</code></pre>
-        </li>
-        <li><strong>Access the Application:</strong> Open your browser and visit <a href="http://localhost:3000">http://localhost:3000</a>.</li>
-    </ol>
+- **Searchable Dashboard**: The app allows users to search for recipes quickly, improving navigation.
+- **Dynamic Filtering**: Users can filter recipes based on categories (e.g., vegetarian, dessert, etc.) to help them easily find what they’re looking for.
+- **Responsive Design**: The app adapts seamlessly to any device, ensuring that users can access it from desktops, tablets, or mobiles without any issues.
+- **Clean UI**: The user interface is simple, ensuring that users can focus on the content without distractions.
 
-    <h2>Future Enhancements for RBAC</h2>
-    <ul>
-        <li><strong>User Management:</strong> Add interfaces for creating, updating, and deleting users and assigning roles.</li>
-        <li><strong>Role Management:</strong> Enable the creation of custom roles with specific permissions.</li>
-        <li><strong>Permissions Handling:</strong> Define access control for key actions (e.g., CRUD operations) based on roles.</li>
-        <li><strong>Activity Logs:</strong> Track and display actions performed by different roles for better auditability.</li>
-        <li><strong>Admin Dashboard:</strong> A dedicated dashboard for administrators to oversee roles and permissions.</li>
-    </ul>
+### How **Food Folio** Supports RBAC Integration:
 
-    <h2>Deployment</h2>
-    <p>The live demo of the project is hosted on <a href="https://food-folio-cjyu.vercel.app/">Vercel</a>.</p>
+1. **Modular Architecture for Role-Based Access**:  
+   - The **Food Folio** app is designed in a modular, component-based structure, which allows easy extensions, such as integrating RBAC. For example, separate components can be created for **admin controls**, **user dashboards**, and **public recipe browsing**, each with different levels of access and functionality.
+   - The existing app already differentiates between the core user interface (accessible by all users) and areas that could eventually be restricted to certain roles, like **recipe management** or **user management**.
 
-    <h2>Evaluation Criteria Compliance</h2>
-    <ul>
-        <li><strong>Creativity and Design Quality:</strong> Clean, intuitive interface with modular, reusable components.</li>
-        <li><strong>Responsiveness:</strong> Fully responsive and tested across various screen sizes.</li>
-        <li><strong>Functionality:</strong> Current functionality is ready for extension into RBAC with user/role/permission layers.</li>
-        <li><strong>User Experience:</strong> Simple navigation and interactions, with accessibility in mind.</li>
-        <li><strong>Technical Skill:</strong> Organized codebase using industry-standard practices. Modular architecture ready for role-based access control extensions.</li>
-        <li><strong>Documentation:</strong> Detailed README with setup instructions, features, and tech stack explained.</li>
-    </ul>
+2. **State Management for User Roles and Permissions**:  
+   - The app’s state management (using React Context API or a future integration with **Redux**) can easily handle the assignment and modification of user roles (admin, user, guest).
+   - Based on these roles, different permissions can be granted. For instance, an **admin** could have full access to CRUD operations on recipes, while a **regular user** could have read-only access or be restricted from adding/editing recipes.
 
-    <p>For any further assistance or questions regarding the project, feel free to reach out via the repository’s issue tracker.</p>
+3. **Protected Routes Based on Roles**:  
+   - Using **React Router**, **protected routes** can be implemented to restrict access to certain pages depending on the user’s role. For example, an **admin** would have access to a special dashboard for managing recipes, while a **guest** or **normal user** would only have read-access to the recipe listings.
+   - Components like a **recipe creation form** or **admin panel** can be made accessible only to specific roles (e.g., **admins**), while other pages remain open to all users.
 
+4. **Future RBAC Implementation**:  
+   - In the future, **Food Folio** can integrate authentication and user management features, where users can register and log in to the app. Based on the role assigned during registration (or by the admin), their access to various parts of the site can be restricted accordingly.
+   - **Permissions Handling**: The app will handle permissions at the component level—admin users will be able to add, edit, or delete recipes, while regular users will only be able to view and filter recipes.
+   - **Activity Logs & Audit Trails**: Future implementations could track user activities, logging actions performed by different roles for auditing purposes (e.g., tracking recipe modifications made by admins).
+
+## How RBAC Enhances User Experience in **Food Folio**:
+
+- **Customization and Security**: By adding RBAC, the app will provide a tailored experience based on user roles. Only users with the appropriate permissions (admin, editor, etc.) will be able to modify content or access restricted areas, improving both **security** and **user experience**.
+- **Simplified Administration**: The integration of RBAC will allow administrators to manage which users can access specific features of the app, ensuring a more organized and secure environment.
+- **Scalability**: As the app grows, adding new roles and permissions becomes easy with RBAC, allowing for better management of user access and content control.
+
+## Tech Stack
+
+- **Frontend**: React.js for building the user interface and handling state management.
+- **Styling**: Custom CSS for designing the app with a responsive, mobile-first approach.
+- **Routing**: React Router for managing page navigation and routing, which will also facilitate role-based access controls.
+- **Hosting**: Vercel for seamless deployment and hosting of the application.
 
 
