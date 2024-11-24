@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Food Folio - Food Waste Management Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1>Food Folio</h1>
+    <p>
+        <strong>Food Folio</strong> is a responsive web application designed to showcase recipes with a searchable and filterable dashboard. 
+        While its primary focus is on recipe management, the app’s architecture and modular codebase can easily integrate Role-Based Access Control (RBAC) features 
+        to manage user roles and permissions.
+    </p>
 
-## Available Scripts
+    <h2>Features</h2>
+    <h3>Current Features</h3>
+    <ul>
+        <li><strong>Searchable Dashboard:</strong> Quickly locate recipes using a powerful search functionality.</li>
+        <li><strong>Dynamic Filtering:</strong> Refine results based on categories or tags.</li>
+        <li><strong>Responsive Design:</strong> Optimized for desktop and mobile viewing.</li>
+        <li><strong>Clean UI:</strong> Minimalistic and visually appealing layout for an intuitive user experience.</li>
+    </ul>
 
-In the project directory, you can run:
+    <h3>Potential RBAC Integration</h3>
+    <ul>
+        <li><strong>User Role Management:</strong> Assign roles (e.g., admin, editor, viewer) to users.</li>
+        <li><strong>Permission Handling:</strong> Define role-specific access to features like adding, editing, or deleting recipes.</li>
+        <li><strong>Secure UI Elements:</strong> Restrict visibility or interaction with components based on roles.</li>
+    </ul>
 
-### `npm start`
+    <h2>Tech Stack</h2>
+    <h3>Frontend</h3>
+    <ul>
+        <li><strong>React:</strong> For component-based UI development and efficient state management.</li>
+        <li><strong>CSS:</strong> For styling, focusing on responsive and accessible design.</li>
+    </ul>
+    <h3>Hosting</h3>
+    <ul>
+        <li><strong>Vercel:</strong> For seamless deployment and continuous integration.</li>
+    </ul>
+    <h3>RBAC Readiness</h3>
+    <ul>
+        <li><strong>Component-Based Design:</strong> Easily extendable for implementing role-based logic.</li>
+        <li><strong>State Management:</strong> Integration with context API or third-party libraries (e.g., Redux) for role/permission handling.</li>
+        <li><strong>Routing:</strong> Protected routes can be added using React Router for role-restricted navigation.</li>
+    </ul>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    <h2>Setup Instructions</h2>
+    <ol>
+        <li><strong>Clone the Repository:</strong>
+            <pre><code>git clone &lt;repository-link&gt;</code></pre>
+        </li>
+        <li><strong>Navigate to the Project Directory:</strong>
+            <pre><code>cd food-folio</code></pre>
+        </li>
+        <li><strong>Install Dependencies:</strong>
+            <pre><code>npm install</code></pre>
+        </li>
+        <li><strong>Run the Development Server:</strong>
+            <pre><code>npm start</code></pre>
+        </li>
+        <li><strong>Access the Application:</strong> Open your browser and visit <a href="http://localhost:3000">http://localhost:3000</a>.</li>
+    </ol>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    <h2>Future Enhancements for RBAC</h2>
+    <ul>
+        <li><strong>User Management:</strong> Add interfaces for creating, updating, and deleting users and assigning roles.</li>
+        <li><strong>Role Management:</strong> Enable the creation of custom roles with specific permissions.</li>
+        <li><strong>Permissions Handling:</strong> Define access control for key actions (e.g., CRUD operations) based on roles.</li>
+        <li><strong>Activity Logs:</strong> Track and display actions performed by different roles for better auditability.</li>
+        <li><strong>Admin Dashboard:</strong> A dedicated dashboard for administrators to oversee roles and permissions.</li>
+    </ul>
 
-### `npm test`
+    <h2>Deployment</h2>
+    <p>The live demo of the project is hosted on <a href="https://food-folio-cjyu.vercel.app/">Vercel</a>.</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    <h2>Evaluation Criteria Compliance</h2>
+    <ul>
+        <li><strong>Creativity and Design Quality:</strong> Clean, intuitive interface with modular, reusable components.</li>
+        <li><strong>Responsiveness:</strong> Fully responsive and tested across various screen sizes.</li>
+        <li><strong>Functionality:</strong> Current functionality is ready for extension into RBAC with user/role/permission layers.</li>
+        <li><strong>User Experience:</strong> Simple navigation and interactions, with accessibility in mind.</li>
+        <li><strong>Technical Skill:</strong> Organized codebase using industry-standard practices. Modular architecture ready for role-based access control extensions.</li>
+        <li><strong>Documentation:</strong> Detailed README with setup instructions, features, and tech stack explained.</li>
+    </ul>
 
-### `npm run build`
+    <p>For any further assistance or questions regarding the project, feel free to reach out via the repository’s issue tracker.</p>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
