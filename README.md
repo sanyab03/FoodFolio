@@ -46,3 +46,17 @@ The **Food Folio** project was developed with an eye toward **Role-Based Access 
 - **Hosting**: Vercel for seamless deployment and hosting of the application.
 
 
+### How this aligns with the assignment:
+
+1. **RBAC Concept**: The **Food Folio** project is built with the future implementation of Role-Based Access Control (RBAC) in mind. The modular design, routing, and state management have been structured so that it will be easy to implement RBAC in the future, which is a direct alignment with the **RBAC UI Assignment**.
+  
+2. **Flexibility & Creativity**: The current implementation of **Food Folio** offers a foundation where you can creatively design and extend the user interface and roles. For example, an admin can be given full access to recipe management, while regular users only have read-only access.
+
+3. **Technical Skill & Best Practices**: The project follows good frontend development practices, including modular design, responsive layout, and clean, maintainable code—essential skills when implementing complex features like RBAC.
+
+4. **User Experience (UX)**: The app has a clean, user-friendly interface that focuses on simplicity and usability, which is crucial for any role-based interface where different users need clear and appropriate access to features.
+
+This will help explain how the current **Food Folio** project aligns with the **RBAC** assignment and how it can be extended in the future to fully implement **Role-Based Access Control (RBAC)**.
+
+
+
