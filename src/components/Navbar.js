@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthContext";
@@ -64,7 +65,14 @@ const Navbar = () => {
       </div>
       {loggedIn ? (
         <div className="join-button">
-          <Link className="join-button button" to="/" onClick={() => { handleLogout(); closeMenu(); }}>
+          <Link
+            className="join-button button"
+            to="/"
+            onClick={() => {
+              handleLogout();
+              closeMenu();
+            }}
+          >
             LOG OUT
           </Link>
         </div>

@@ -40,7 +40,7 @@ const Content = () => {
             <Link className="signup-button" to="/signup">
               <span className="highlight2">GET STARTED</span>
             </Link>
-          </div>)};
+          </div>)}
     </div>
     </>
   );

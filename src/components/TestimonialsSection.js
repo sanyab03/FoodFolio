@@ -4,22 +4,27 @@ import Sun from "../assets/Highlight_05.png";
 const TestimonialsSection = () => {
   return (
     <div className="testimonials-section">
-      <div className="heading-highlights">
-        <img id="highlight-heading" src={Sun} alt="Sun Photo" className="colored-image"/>
+      <div className="heading-highlight">
         <h2>Testimonials</h2>
       </div>
       <div className="testimonials-container">
         <div className="testimonial">
-          <blockquote>"FoodFolio has been a game-changer for me!"</blockquote>
-          <cite>- User 1</cite>
+          <blockquote>
+            "I never realized how much food I was wasting until I started tracking it. This app helped us cut our kitchen waste by half in two weeks."
+          </blockquote>
+          <cite>— A family of four</cite>
         </div>
         <div className="testimonial">
-          <blockquote>"I love how easy it is to manage my food inventory now."</blockquote>
-          <cite>- User 2</cite>
+          <blockquote>
+            "We used to waste trays of food weekly, now we donate effortlessly thanks to this platform."
+          </blockquote>
+          <cite>— Head Chef, Local Eatery</cite>
         </div>
         <div className="testimonial">
-          <blockquote>"Food Folio simplifies meal planning brilliantly. Highly recommend!"</blockquote>
-          <cite>- User 3</cite>
+          <blockquote>
+            "Teaching food waste was tough,  now our cafeteria wastes less than 10% thanks to this tool."
+          </blockquote>
+          <cite>— A school administrator</cite>
         </div>
       </div>
     </div>
