@@ -100,11 +100,11 @@ const DonationPage = () => {
     <div className="donation-body">
       <div className="head-description">
         <h1>
-          Donate Food with <span className="site-name">fOODfOLIO</span>
+          Donate Food , Spread Hope
         </h1>
         <p>
-          "Food donation is not just about filling empty stomachs; it's about nourishing hope, <br />
-          feeding compassion, and cultivating a brighter future for all."
+          Food donation is not just about filling empty stomachs, it's about nourishing hope, <br />
+          feeding compassion, and cultivating a brighter future for all.
         </p>
       </div>
 
@@ -166,11 +166,9 @@ const DonationPage = () => {
           )}
         </div>
 
-        {/* Map Section */}
         <div className="map-container" id="map" style={{ width: "50%", height: "510px" }}></div>
       </div>
 
-      {/* Success Modal */}
       {showSuccess && (
         <div className="modal-success">
           🎉 Thank you for your donation!

@@ -1,152 +1,107 @@
-import React, { useState } from 'react';
-import Arrow1 from "../assets/arrow1.png"; 
+import React, { useState } from "react";
 
-const InventoryPage = () => {
-  const [inventory, setInventory] = useState([
-    { id: 1, name: 'Apples', quantity: 10, expiration: '2024-07-20', category: 'Fruits' },
-    { id: 2, name: 'Carrots', quantity: 5, expiration: '2024-07-18', category: 'Vegetables' },
-  ]);
-  const [editingItem, setEditingItem] = useState(null);
-  const [newItem, setNewItem] = useState({ name: '', quantity: '', expiration: '', category: '' });
-  const [filter, setFilter] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleEdit = (item) => {
-    setEditingItem(item);
+function Inventory() {
+  const [items, setItems] = useState([]);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    quantity: "",
+    expires: "",
+    category: ""
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
   };
 
-  const handleSave = () => {
-    setInventory(inventory.map(item => (item.id === editingItem.id ? editingItem : item)));
-    setEditingItem(null);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.quantity || !formData.expires || !formData.category) return;
+    setItems((prev) => [...prev, formData]);
+    setFormData({ name: "", quantity: "", expires: "", category: "" });
   };
 
-  const handleDelete = (id) => {
-    setInventory(inventory.filter(item => item.id !== id));
+  const handleDelete = (index) => {
+    setItems((prev) => prev.filter((_, i) => i !== index));
   };
-
-  const handleAdd = () => {
-    if (!newItem.name || !newItem.quantity || !newItem.expiration || !newItem.category) {
-      setErrorMessage('All fields are required.');
-      return;
-    }
-    setInventory([...inventory, { ...newItem, id: Date.now() }]);
-    setNewItem({ name: '', quantity: '', expiration: '', category: '' });
-    setErrorMessage('');
-  };
-
-  const handleFilter = (category) => {
-    setFilter(category);
-  };
-
-  const filteredInventory = filter ? inventory.filter(item => item.category === filter) : inventory;
 
   return (
-    <div className="inventory-page">
-      <h2>Inventory <img id="arrow1" src={Arrow1} className="arrow" /></h2>
-      <div className="filter-buttons">
-        <button 
-          className={filter === '' ? 'active' : ''}
-          onClick={() => handleFilter('')}
-        >
-          All
-        </button>
-        <button 
-          className={filter === 'Fruits' ? 'active' : ''}
-          onClick={() => handleFilter('Fruits')}
-        >
-          Fruits
-        </button>
-        <button 
-          className={filter === 'Vegetables' ? 'active' : ''}
-          onClick={() => handleFilter('Vegetables')}
-        >
-          Vegetables
-        </button>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Expiration Date</th>
-            <th>Category</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredInventory.map(item => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>{item.quantity}</td>
-              <td>{item.expiration}</td>
-              <td>{item.category}</td>
-              <td>
-                <button onClick={() => handleEdit(item)}>Edit</button>
-                <button onClick={() => handleDelete(item.id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="inventory-container">
+      <h1 className="inventory-title">Inventory</h1>
 
-      {editingItem && (
-        <div className="edit-form">
-          <h3>Edit Item</h3>
+      <div className="inventory-table-container">
+        {items.length === 0 ? (
+          <p className="no-items">No items yet.</p>
+        ) : (
+          <table className="inventory-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Expiration Date</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item, idx) => (
+                <tr key={idx}>
+                  <td data-label="Name">{item.name}</td>
+                  <td data-label="Quantity">{item.quantity}</td>
+                  <td data-label="Expiration Date">{item.expires}</td>
+                  <td data-label="Category">
+                    <span className={`tag ${item.category.toLowerCase()}`}>{item.category}</span>
+                  </td>
+                  <td data-label="Actions">
+                    <button className="edit-btn">Edit</button>
+                    <button className="delete-btn" onClick={() => handleDelete(idx)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      <div className="add-form">
+        <h2>Add New Item</h2>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
-            value={editingItem.name}
-            onChange={(e) => setEditingItem({ ...editingItem, name: e.target.value })}
+            name="name"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleChange}
           />
           <input
             type="number"
-            value={editingItem.quantity}
-            onChange={(e) => setEditingItem({ ...editingItem, quantity: e.target.value })}
+            name="quantity"
+            placeholder="Quantity"
+            value={formData.quantity}
+            onChange={handleChange}
           />
           <input
             type="date"
-            value={editingItem.expiration}
-            onChange={(e) => setEditingItem({ ...editingItem, expiration: e.target.value })}
+            name="expires"
+            value={formData.expires}
+            onChange={handleChange}
           />
           <input
             type="text"
-            value={editingItem.category}
-            onChange={(e) => setEditingItem({ ...editingItem, category: e.target.value })}
+            name="category"
+            placeholder="Category"
+            value={formData.category}
+            onChange={handleChange}
           />
-          <button onClick={handleSave}>Save</button>
-        </div>
-      )}
-
-      <div className="add-form">
-        <h3>Add New Item</h3>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
-        <input
-          type="text"
-          placeholder="Name"
-          value={newItem.name}
-          onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-        />
-        <input
-          type="number"
-          placeholder="Quantity"
-          value={newItem.quantity}
-          onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
-        />
-        <input
-          type="date"
-          placeholder="Expiration Date"
-          value={newItem.expiration}
-          onChange={(e) => setNewItem({ ...newItem, expiration: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Category"
-          value={newItem.category}
-          onChange={(e) => setNewItem({ ...newItem, category: e.target.value })}
-        />
-        <button onClick={handleAdd}>Add</button>
+          <button type="submit">Add</button>
+        </form>
       </div>
     </div>
   );
-};
+}
 
-export default InventoryPage;
+export default Inventory;

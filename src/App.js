@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import { AuthProvider } from "./AuthContext";
 import Recipes from "./pages/Recipes";
 import AboutUs from "./pages/AboutUs";
+import RecipeDetail from "./pages/RecipeDetail";
 
 
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/donation" element={<Donation />} />
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/Recipes" element={<Recipes />} />
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />}></Route>

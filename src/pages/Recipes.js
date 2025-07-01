@@ -1,152 +1,135 @@
-import React, { useState } from 'react';
-import underline1 from "../assets/underline-heading.png";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Recipes = () => {
-  const [recipes, setRecipes] = useState([
-    { id: 1, name: 'Apple Pie', ingredients: 'Apples, Sugar, Pie Crust', instructions: 'Bake at 350F for 45 minutes', category: 'Dessert' },
-    { id: 2, name: 'Carrot Soup', ingredients: 'Carrots, Onion, Garlic, Broth', instructions: 'Boil for 20 minutes', category: 'Soup' },
-  ]);
+  const [ingredient, setIngredient] = useState('');
+  const [allMeals, setAllMeals] = useState([]);
+  const [displayedMeals, setDisplayedMeals] = useState([]);
+  const [error, setError] = useState('');
+  const [vegOnly, setVegOnly] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const [editingRecipe, setEditingRecipe] = useState(null);
-  const [newRecipe, setNewRecipe] = useState({ name: '', ingredients: '', instructions: '', category: '' });
-  const [filter, setFilter] = useState('');
-  const [selectedFilter, setSelectedFilter] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const nonVegKeywords = [
+    'chicken', 'beef', 'pork', 'fish', 'lamb', 'shrimp',
+    'crab', 'bacon', 'duck', 'meat', 'mutton', 'turkey', 'salami' , 'egg', 'sausage'
+  ];
 
-  const handleEdit = (recipe) => {
-    setEditingRecipe(recipe);
+  const isVegetarian = (mealName) => {
+    const name = mealName.toLowerCase();
+    return !nonVegKeywords.some(keyword => name.includes(keyword));
   };
 
-  const handleSave = () => {
-    setRecipes(recipes.map(recipe => (recipe.id === editingRecipe.id ? editingRecipe : recipe)));
-    setEditingRecipe(null);
-  };
-
-  const handleDelete = (id) => {
-    setRecipes(recipes.filter(recipe => recipe.id !== id));
-  };
-
-  const handleAdd = () => {
-    if (!newRecipe.name || !newRecipe.ingredients || !newRecipe.instructions || !newRecipe.category) {
-      setErrorMessage('Please fill out all fields before adding a new recipe.');
+  const fetchRecipes = async () => {
+    if (!ingredient.trim()) {
+      setError('Please enter an ingredient.');
       return;
     }
-    setRecipes([...recipes, { ...newRecipe, id: Date.now() }]);
-    setNewRecipe({ name: '', ingredients: '', instructions: '', category: '' });
-    setErrorMessage('');
+
+    setLoading(true);
+    setError('');
+    try {
+      const response = await axios.get(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
+      );
+      const data = response.data;
+
+      if (data.meals) {
+        setAllMeals(data.meals);
+
+        const filtered = vegOnly
+          ? data.meals.filter(meal => isVegetarian(meal.strMeal))
+          : data.meals;
+
+        setDisplayedMeals(filtered);
+        setError(filtered.length === 0 ? 'No vegetarian recipes found for this ingredient.' : '');
+      } else {
+        setAllMeals([]);
+        setDisplayedMeals([]);
+        setError('No recipes found for this ingredient.');
+      }
+    } catch {
+      setError('Error fetching recipes.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleFilter = (category) => {
-    setFilter(category);
-    setSelectedFilter(category);
-  };
+  useEffect(() => {
+    if (allMeals.length === 0) return;
 
-  const filteredRecipes = filter ? recipes.filter(recipe => recipe.category === filter) : recipes;
+    const filtered = vegOnly
+      ? allMeals.filter(meal => isVegetarian(meal.strMeal))
+      : allMeals;
+
+    setDisplayedMeals(filtered);
+    setError(filtered.length === 0 ? 'No vegetarian recipes found for this ingredient.' : '');
+  }, [vegOnly]);
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') fetchRecipes();
+  };
 
   return (
-    <div className="recipes-page p-4">
-      <h2 className="text-2xl font-bold mb-4">Recipes</h2>
-      <img className="underline-image mb-4" src={underline1} alt="Underline" />
+    <div className="recipes-container">
+      <h1 className="recipes-title">
+        <span className="highlight">Discover Recipes</span>{'  '}
+      </h1>
+      <p className="recipes-description">
+        Discover recipes using your available inventory. From chicken to chickpeas, we’ve got you covered!
+      </p>
 
-      {/* Filter Buttons */}
-      <div className="filter-buttons flex justify-center space-x-2 mb-6">
-        <button className={`px-4 py-2 rounded ${selectedFilter === '' ? 'bg-green-600 text-white' : 'bg-gray-300'}`} onClick={() => handleFilter('')}>All</button>
-        <button className={`px-4 py-2 rounded ${selectedFilter === 'Dessert' ? 'bg-green-600 text-white' : 'bg-gray-300'}`} onClick={() => handleFilter('Dessert')}>Dessert</button>
-        <button className={`px-4 py-2 rounded ${selectedFilter === 'Soup' ? 'bg-green-600 text-white' : 'bg-gray-300'}`} onClick={() => handleFilter('Soup')}>Soup</button>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Enter an ingredient"
+          value={ingredient}
+          onChange={(e) => setIngredient(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
+        <button onClick={fetchRecipes}>
+          <FaSearch /> Search
+        </button>
+
+        <div style={{ marginLeft: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <label className="neumorphic-toggle">
+          <input
+            type="checkbox"
+            checked={vegOnly}
+            onChange={() => setVegOnly(!vegOnly)}
+          />
+        <span className="slider"></span>
+        </label>
+        <span style={{ fontWeight: '500' }}>Veg Only</span>
       </div>
 
-      {/* Recipe Table */}
-      <table className="min-w-full table-auto bg-white text-black shadow-md rounded-lg overflow-hidden w-full">
-        <thead>
-          <tr className="bg-gray-800 text-white text-left">
-            <th className="p-3">Name</th>
-            <th className="p-3">Ingredients</th>
-            <th className="p-3">Instructions</th>
-            <th className="p-3">Category</th>
-            <th className="p-3">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredRecipes.map(recipe => (
-            <tr key={recipe.id} className="hover:bg-gray-100">
-              <td className="p-3">{recipe.name}</td>
-              <td className="p-3">{recipe.ingredients}</td>
-              <td className="p-3">{recipe.instructions}</td>
-              <td className="p-3">{recipe.category}</td>
-              <td className="p-3 space-x-2">
-                <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => handleEdit(recipe)}>Edit</button>
-                <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => handleDelete(recipe.id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      </div>
 
-      {/* Edit Recipe Form */}
-      {editingRecipe && (
-        <div className="edit-form bg-gray-100 p-4 mt-6 rounded">
-          <h3 className="text-xl mb-4">Edit Recipe</h3>
-          <input
-            type="text"
-            className="border p-2 mb-2 w-full"
-            value={editingRecipe.name}
-            onChange={(e) => setEditingRecipe({ ...editingRecipe, name: e.target.value })}
-          />
-          <input
-            type="text"
-            className="border p-2 mb-2 w-full"
-            value={editingRecipe.ingredients}
-            onChange={(e) => setEditingRecipe({ ...editingRecipe, ingredients: e.target.value })}
-          />
-          <input
-            type="text"
-            className="border p-2 mb-2 w-full"
-            value={editingRecipe.instructions}
-            onChange={(e) => setEditingRecipe({ ...editingRecipe, instructions: e.target.value })}
-          />
-          <input
-            type="text"
-            className="border p-2 mb-2 w-full"
-            value={editingRecipe.category}
-            onChange={(e) => setEditingRecipe({ ...editingRecipe, category: e.target.value })}
-          />
-          <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={handleSave}>Save</button>
-        </div>
-      )}
+      {error && <p className="error-message">{error}</p>}
+      {loading && <div className="loader">Loading recipes...</div>}
 
-      {/* Add New Recipe Form */}
-      <div className="add-form bg-gray-100 p-4 mt-6 rounded">
-        <h3 className="text-xl mb-4">Add New Recipe</h3>
-        {errorMessage && <div className="text-red-500 mb-2">{errorMessage}</div>}
-        <input
-          type="text"
-          className="border p-2 mb-2 w-full"
-          placeholder="Name"
-          value={newRecipe.name}
-          onChange={(e) => setNewRecipe({ ...newRecipe, name: e.target.value })}
-        />
-        <input
-          type="text"
-          className="border p-2 mb-2 w-full"
-          placeholder="Ingredients"
-          value={newRecipe.ingredients}
-          onChange={(e) => setNewRecipe({ ...newRecipe, ingredients: e.target.value })}
-        />
-        <input
-          type="text"
-          className="border p-2 mb-2 w-full"
-          placeholder="Instructions"
-          value={newRecipe.instructions}
-          onChange={(e) => setNewRecipe({ ...newRecipe, instructions: e.target.value })}
-        />
-        <input
-          type="text"
-          className="border p-2 mb-2 w-full"
-          placeholder="Category"
-          value={newRecipe.category}
-          onChange={(e) => setNewRecipe({ ...newRecipe, category: e.target.value })}
-        />
-        <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={handleAdd}>Add</button>
+      <div className="recipes-grid">
+        {displayedMeals.map((meal) => (
+          <div className="recipe-card" key={meal.idMeal}>
+            <Link to={`/recipe/${meal.idMeal}`}>
+              <img
+                src={meal.strMealThumb}
+                alt={meal.strMeal}
+                className="recipe-img"
+              />
+            </Link>
+            <div className="recipe-info">
+              <h3>{meal.strMeal}</h3>
+              {vegOnly && isVegetarian(meal.strMeal) && (
+                <span className="veg-badge">🌱 Veg</span>
+              )}
+              <Link to={`/recipe/${meal.idMeal}`} className="recipe-link">
+                See Recipe
+              </Link>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
