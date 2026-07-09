@@ -1,19 +1,20 @@
 import React from 'react'
 import Content from '../components/Content'
-import Problems from '../components/Problems'
-import FeaturesSection from '../components/FeaturesSection';
+// import FeaturesSection from '../components/FeaturesSection';
 import HowItWorksSection from '../components/HowItWorksSection';
-import TestimonialsSection from '../components/TestimonialsSection';
+import SurplusSection from '../components/SurplusSection';
+import AboutSection from '../components/AboutSection';
 
 
 const Home = () => {
   return (
     <>
     <Content/>
-    <Problems/>
-    <FeaturesSection />
+    <AboutSection/>
+    <SurplusSection/>
     <HowItWorksSection />
-    <TestimonialsSection />
+    {/* <FeaturesSection /> */}
+    
     </>
   )
 }

@@ -1,0 +1,138 @@
+.surplus-section {
+  padding: 60px 30px;
+  background-color: #fff;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.surplus-heading {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.sub-heading {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 10px;
+}
+
+.surplus-carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  scrollbar-width: none;
+}
+
+.surplus-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+
+.donation-card {
+  flex: 0 0 auto;
+  width: 240px;
+  background: rgba(255, 255, 255, 0.25); 
+  border-radius: 20px;
+  text-align: center;
+  padding: 16px 20px;
+  transition: 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  position: relative;
+  backdrop-filter: blur(10px);           
+  -webkit-backdrop-filter: blur(10px);  
+  border: 1px solid rgba(255, 255, 255, 0.3); 
+}
+
+.donation-card:hover {
+  background-color:#7ec157;
+  color: white;
+  transform: translateY(-6px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.donation-img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin: 0 auto 10px;
+  background: #fff;
+  border-radius: 50%;
+  padding: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.donation-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 6px 0;
+}
+
+.donation-type {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 4px;
+}
+
+.donation-desc {
+  font-size: 13px;
+  color: inherit;
+  margin-bottom: 12px;
+  min-height: 40px;
+}
+
+.donation-btn {
+  padding: 8px 16px;
+  background: #fff;
+  color: #7ec157;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.donation-card:hover .donation-btn {
+  background: #fff;
+  color: #7ec157;
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+  transition: background 0.2s ease;
+}
+
+.scroll-btn:hover {
+  background: #eee;
+}
+
+.scroll-btn.left {
+  left: 0;
+}
+
+.scroll-btn.right {
+  right: 0;
+}

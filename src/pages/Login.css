@@ -1,0 +1,152 @@
+.login-body {
+  background: #fff;
+  color: #000;
+  letter-spacing: 1px;
+  font-family: 'Poppins', sans-serif;
+  
+}
+
+
+.login-body-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url(../assets/wastefood.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+
+.login-container {
+  width: 22rem;
+  position: absolute;
+}
+
+.form-container {
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  z-index: 99;
+}
+
+.opacity {
+  opacity: 0.85;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.login-container form input {
+  display: block;
+  padding: 14px;
+  width: 100%;
+  margin: 1rem 0;
+  color: #000;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 15px;
+  backdrop-filter: blur(5px);
+}
+
+.login-container form input:focus {
+  box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
+  animation: wobble 0.3s ease-in-out;
+}
+
+.login-button {
+  background-color: #366f15;
+  color: #fff !important;
+  display: block !important;
+  border-radius: 25px !important;
+  font-size: 17px !important;
+  letter-spacing: 1px !important;
+  font-weight: bold !important;
+  width: 100%;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.login-button:hover {
+  background-color: #73bf47;
+  box-shadow: 0 0 10px 1px rgba(88, 88, 88, 0.15);
+  transform: scale(1.02);
+}
+
+.message {
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 15px auto 10px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.success {
+  color: #00684a;
+  border: 1px solid #c0fae6;
+  background-color: #e3fcf7;
+}
+
+.error {
+  color: #680000;
+  border: 1px solid #fac0c0;
+  background-color: #fce3e3;
+}
+
+.login-timer {
+  color: #000;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.switch-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #444;
+}
+
+.switch-link {
+  font-weight: bold;
+  color: #08481c;
+  cursor: pointer;
+}
+
+.switch-link:hover {
+  color: #056833;
+}
+
+@keyframes wobble {
+  0% {
+    transform: scale(1.025);
+  }
+  25% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.025);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .login-container {
+    width: 90%;
+  }
+}
