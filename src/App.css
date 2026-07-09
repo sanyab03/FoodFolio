@@ -11,6 +11,7 @@ body {
   min-height: 100vh;
   z-index: -10;
   overflow-x: hidden;
+
 }
 /*Navabar*/
 
@@ -25,28 +26,6 @@ nav {
   position: relative;
 }
 
-.navbar {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-padding: 18px 8%;
-background: rgba(10,10,18,.75);
-backdrop-filter: blur(18px);
-border-bottom:1px solid rgba(255,255,255,.08);
-z-index:1000;
-}
-
-.navbar ul {
-  list-style-type: none;
-  margin-top: 2.8rem;
-  background-color: transparent;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.logo {
-  font-size: 1.5rem;
-}
 
 .menu-icon, .close-icon {
   display: none;
@@ -207,32 +186,7 @@ font-style: normal;
 text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-.signup-container {
-display: flex;
-justify-content: center;
-align-items: center;
-margin-right: 2px;
-transition: transform 0.3s ease;
-}
-.signup-button {
-display: block;
-width: 320px;
-background: linear-gradient(0deg,#019a4b, #07331c);
-font-family: 'Montserrat', sans-serif;
-color: #fff;
-font-size: 24px;
-text-align: center;
-line-height: 60px;
-text-decoration: none;
-border-radius: 45px;
-border: none;
-box-shadow: 0 0 10px 1px #5858583d;
-margin-top: 50px;
-}
 
-.signup-button:hover{
-animation: disco 3s infinite;
-}
 
 @keyframes disco {
 0% {
@@ -250,15 +204,7 @@ animation: disco 3s infinite;
   box-shadow: 0 0 10px #07000f76;
 }
 }
-.signup-button:hover {
-  background: linear-gradient(0deg,#07000f, #07000f 180%, #07000fe8);
-box-shadow: 0 0 10px 2px #07000fde;
-}
-.logged-in-text{
-  text-transform: uppercase;
-  font-style:normal important;
-  font-size: 25px;
-}
+
 .join-button {
   margin-right: 30px;
 }

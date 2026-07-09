@@ -1,90 +1,96 @@
+// import { Link, useNavigate } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../AuthContext";
 
-const Navbar = () => {
-  const { loggedIn, handleLogout } = useContext(AuthContext);
-  const [menuOpen, setMenuOpen] = useState(false);
+// export default function Navbar() {
+//   const location = useLocation();
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+//   const isHome = location.pathname === "/";
+//   <header className={`navbar ${isHome ? "navbar-dark" : "navbar-light"}`}></header>
+//   const navigate = useNavigate();
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
+//   const goToDonate = () => {
+//     if (window.location.pathname !== "/") {
+//       navigate("/", { state: { scrollTo: "donate" } });
+//     } else {
+//       const section = document.getElementById("donate");
+
+//       if (section) {
+//         section.scrollIntoView({
+//           behavior: "smooth",
+//           block: "start",
+//         });
+//       }
+//     }
+//   };
+
+//   return (
+//     <header className="navbar">
+//       <div className="navbar-logo">
+//         🍃 <span>FoodFolio</span>
+//       </div>
+
+//       <nav>
+//         <ul className="navbar-links">
+//           <li>
+//             <Link to="/">Home</Link>
+//           </li>
+
+//           <li>
+//             <Link to="/inventory">Inventory</Link>
+//           </li>
+
+//           <li>
+//             <button onClick={goToDonate}>Donate</button>
+//           </li>
+//         </ul>
+//       </nav>
+
+//       <Link to="/signup" className="navbar-btn">
+//         Get Started
+//       </Link>
+//     </header>
+//   );
+// }
+
+
+import { Link, useLocation } from "react-router-dom";
+import "./Navbar.css";
+
+export default function Navbar() {
+  const location = useLocation();
+
+  const isHome = location.pathname === "/";
 
   return (
-    <nav className={`navbar ${menuOpen ? "responsive" : ""}`}>
-      <div className="logo">
-        <Link className="button" to="/" onClick={closeMenu}>
-          fOOD
-          <br />
-          fOLIO
-        </Link>
-      </div>
-      {!menuOpen && (
-        <div className="menu-icon" onClick={toggleMenu}>
-          &#9776;
-        </div>
-      )}
-      {menuOpen && (
-        <div className="close-icon" onClick={closeMenu}>
-          &times;
-        </div>
-      )}
-      <div className={`reveal-text ${menuOpen ? "open" : ""}`}>
-        <ul className="buttons">
+    <header className={`navbar ${isHome ? "navbar-dark" : "navbar-light"}`}>
+      <Link to="/" className="navbar-logo">
+        🍃 <span>FoodFolio</span>
+      </Link>
+
+      <nav>
+        <ul className="navbar-links">
           <li>
-            <Link className="button" to="/#problems" onClick={closeMenu}>
-              HOME
-            </Link>
+            <Link to="/">Home</Link>
           </li>
+
           <li>
-            <Link className="button" to="/donation" onClick={closeMenu}>
-              DONATE
-            </Link>
+            <Link to="/inventory">Inventory</Link>
           </li>
+
           <li>
-            <Link className="button" to="/inventory" onClick={closeMenu}>
-              INVENTORY
-            </Link>
+            <Link to="/donation">Donate</Link>
           </li>
+
           <li>
-            <Link className="button" to="/recipes" onClick={closeMenu}>
-              RECIPES
-            </Link>
-          </li>
-          <li>
-            <Link className="button" to="/aboutus" onClick={closeMenu}>
-              ABOUT US
-            </Link>
+            <Link to="/aboutus">About Us</Link>
           </li>
         </ul>
-      </div>
-      {loggedIn ? (
-        <div className="join-button">
-          <Link
-            className="join-button button"
-            to="/"
-            onClick={() => {
-              handleLogout();
-              closeMenu();
-            }}
-          >
-            LOG OUT
-          </Link>
-        </div>
-      ) : (
-        <div className="join-button">
-          <Link className="join-button button" to="/login" onClick={closeMenu}>
-            LOG IN
-          </Link>
-        </div>
-      )}
-    </nav>
-  );
-};
+      </nav>
 
-export default Navbar;
+      <Link to="/signup" className="navbar-btn">
+        Get Started
+      </Link>
+    </header>
+  );
+}
