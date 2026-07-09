@@ -1,6 +1,6 @@
 import React from "react";
 import "./AboutSection.css";
-import { color } from "framer-motion";
+// import { color } from "framer-motion";
 
 const AboutSection = () => {
   return (

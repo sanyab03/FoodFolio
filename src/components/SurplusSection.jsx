@@ -53,7 +53,7 @@ const SurplusSection = () => {
     const cardWidth = scrollContainer.querySelector(".donation-card").offsetWidth + 20;
     const midpoint = (items.length / 3) * cardWidth;
     scrollContainer.scrollLeft = midpoint;
-  }, []);
+  }, [items.length]);
 
   const handleScroll = (direction) => {
     const scrollContainer = scrollRef.current;
