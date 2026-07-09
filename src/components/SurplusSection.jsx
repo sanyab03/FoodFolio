@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SurplusSection.css";
 import Ngo1 from "../assets/ngo1.png";
 import Ngo2 from "../assets/ngo2.png";
@@ -46,6 +47,7 @@ const donationPartners = [
 
 const SurplusSection = () => {
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
   const items = [...donationPartners, ...donationPartners, ...donationPartners];
 
   useEffect(() => {
@@ -89,7 +91,12 @@ const SurplusSection = () => {
               <h3 className="donation-title">{partner.name}</h3>
               <p className="donation-type">{partner.category}</p>
               <p className="donation-desc">{partner.description}</p>
-              <button className="donation-btn">Donate Now</button>
+              <button
+              className="donation-btn"
+              onClick={() => navigate("/donation")}
+            >
+              Donate Now
+            </button>
             </div>
           ))}
         </div>
